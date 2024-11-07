@@ -1,0 +1,86 @@
+
+Git Leader:
+ …or create a new repository on the command line
+    ...
+    ...
+    ...
+=>  * [new branch]      main -> main 
+=> branch 'main' set up to track 'origin/main'. (is OK)
+
+Developer:
+    # tao 1 nhanh develop
+    git branch develop
+    # check nhanh hien tai
+    git branch
+    # vao nhanh develop
+    git checkout develop
+
+Leader:
+    git checkout main 
+    # giao việc thông qua issues trực tiếp trên github
+    # sẽ có gắn số tag của công việc
+    # Khi commit code lên phải commit đúng với số tag công việc được giao
+
+    # NV dau tien push develop len github
+    git push -u origin develop 
+
+Developer:
+    # tao feature cung ten voi nv va so tag nv duoc giao
+    git checkout -b feature/1-cart.models.py-file develop
+    
+    Developer > feature/1-cart.models.py-file:
+        # start code ... code finish!
+        git status
+        git add <file name>
+        ✖　git commit -m 'Nguyen add cart model file'
+        〇  git commit -m '#1 - Nguyen update model cart'
+        git push --set-upstream origin feature/1-cart.models.py-file
+
+Leader/Reviewrs/Assignees:
+    duyet bai va merge feature cho developer o muc Pull requests tren github
+
+Developer:
+    git checkout develop
+    #  release
+    #  create tag
+    git checkout -b release-1.0.0 develop
+    #  tao the tag
+    git tag 'v1.0.0'
+    git push --tags
+    #  Leader se kiem tra phien ban thong qua the tag o muc Code tren github
+    git merge develop
+    git push 
+
+Leader (o nhanh main)
+    # Sau khi release leader se Pull requests va danh gia
+    git checkout main
+    # luc nay chua co gi ca ta chi can pull or merge la duoc
+    git pull
+    
+# Khi ap vao main thi ta phai xoa old data
+git branch
+# xoa o local
+# Nếu nhánh featureName chưa được hợp nhất, 
+# Git sẽ báo lỗi và từ chối xóa để tránh mất dữ liệu.
+git branch -d releaseVersion
+git branch -d featureName 
+git push origin --delete release-1.0.0
+# git branch -D featureName = git branch --delete --force featureName
+# Nó sẽ xóa nhánh featureName ngay cả khi nhánh này chưa được hợp nhất, 
+# và bỏ qua cảnh báo về khả năng mất dữ liệu.
+
+# lấy lại branch đã xóa (was ...)
+git reflog 
+git checkout -b restore_fileName idDeletedFileName
+ex: checkout -b restore_
+
+# xoa remote
+git push origin -d releaseVersion
+git push origin -d featureName
+
+    
+
+
+
+
+    
